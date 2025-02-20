@@ -5,6 +5,7 @@ split-debuginfo = "packed"
 
 [workspace]
 members = [
+	"reclipse",
     "account-decoder",
     "account-decoder-client-types",
     "accounts-bench",

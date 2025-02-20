@@ -278,6 +278,25 @@ pub async fn replay_from_test_vector(test_vector_path: PathBuf) -> Result<(), an
             block.blockhash,
             block.transactions.len()
         );
+        println!("Replaying slot #{}...", block.parent_slot + 1);
+        let decoded_transactions: Vec<_> = block
+            .transactions
+            .iter()
+            .map(|tx| {
+                tx.transaction
+                    .decode()
+                    .unwrap_or_else(|| panic!("Failed to decode transaction"))
+                    .into_legacy_transaction()
+                    .unwrap_or_else(|| panic!("Failed to convert into legacy transaction"))
+            })
+            .collect();
+
+        let results = replay_bank.process_transactions(decoded_transactions.iter());
+        for (i, result) in results.into_iter().enumerate() {
+            if let Err(e) = result {
+                panic!("Failed to reexecute tx #{i}: {e}");
+            }
+        }
     }
 
     Ok(())

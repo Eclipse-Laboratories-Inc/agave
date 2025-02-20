@@ -35,7 +35,7 @@ impl Network {
             Network::EclipseDevnet => {
                 todo!()
             }
-            Network::EclipseTestnet => 1712572914,
+            Network::EclipseTestnet => 1722252148,
             Network::SolanaMainnet => {
                 todo!()
             }

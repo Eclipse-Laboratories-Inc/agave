@@ -252,7 +252,7 @@ pub struct ConfirmedBlock {
 
 // Confirmed block with type guarantees that transaction metadata
 // is always present. Used for uploading to BigTable.
-#[derive(Clone, Debug, PartialEq)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, Debug, PartialEq)]
 pub struct VersionedConfirmedBlock {
     pub previous_blockhash: String,
     pub blockhash: String,
@@ -386,6 +386,7 @@ impl ConfirmedBlock {
 // Confirmed block with type guarantees that transaction metadata is always
 // present, as well as a list of the entry data needed to cryptographically
 // verify the block. Used for uploading to BigTable.
+#[derive(serde::Serialize, serde::Deserialize, Clone, Debug, PartialEq)]
 pub struct VersionedConfirmedBlockWithEntries {
     pub block: VersionedConfirmedBlock,
     pub entries: Vec<EntrySummary>,
@@ -393,6 +394,7 @@ pub struct VersionedConfirmedBlockWithEntries {
 
 // Data needed to reconstruct an Entry, given an ordered list of transactions in
 // a block. Used for uploading to BigTable.
+#[derive(serde::Serialize, serde::Deserialize, Clone, Debug, PartialEq)]
 pub struct EntrySummary {
     pub num_hashes: u64,
     pub hash: Hash,
@@ -409,7 +411,7 @@ pub enum TransactionWithStatusMeta {
     Complete(VersionedTransactionWithStatusMeta),
 }
 
-#[derive(Clone, Debug, PartialEq)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, Debug, PartialEq)]
 pub struct VersionedTransactionWithStatusMeta {
     pub transaction: VersionedTransaction,
     pub meta: TransactionStatusMeta,

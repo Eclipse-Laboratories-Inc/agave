@@ -370,7 +370,7 @@ impl From<&LoadedAddresses> for UiLoadedAddresses {
     }
 }
 
-#[derive(Clone, Debug, PartialEq)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, Debug, PartialEq)]
 pub struct TransactionTokenBalance {
     pub account_index: u8,
     pub mint: String,
@@ -536,7 +536,7 @@ pub struct InnerInstruction {
     pub stack_height: Option<u32>,
 }
 
-#[derive(Clone, Debug, PartialEq)]
+#[derive(serde::Serialize, serde::Deserialize, Clone, Debug, PartialEq)]
 pub struct TransactionStatusMeta {
     pub status: TransactionResult<()>,
     pub fee: u64,

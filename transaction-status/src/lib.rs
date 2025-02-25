@@ -259,6 +259,7 @@ pub struct VersionedConfirmedBlock {
     pub parent_slot: Slot,
     pub transactions: Vec<VersionedTransactionWithStatusMeta>,
     pub rewards: Rewards,
+    #[serde(skip)]
     pub num_partitions: Option<u64>,
     pub block_time: Option<UnixTimestamp>,
     pub block_height: Option<u64>,
